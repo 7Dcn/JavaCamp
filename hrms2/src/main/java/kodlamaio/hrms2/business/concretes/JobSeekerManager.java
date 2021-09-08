@@ -49,25 +49,25 @@ public class JobSeekerManager implements JobSeekerService {
 				jobSeeker.getLastName(), jobSeeker.getBirthDate()).isSuccess())
 			return new ErrorResult("Kullanıcı kimliği doğrulanamadı.");
 
-		if (userDao.existsUserByEmail(jobSeeker.getEmail()))
+		if (userDao.existsUserByEmail(jobSeeker.getUser().getEmail()))
 			return new ErrorResult("Email bu sisteme kayıtlı.");
 
 		if (jobSeekerDao.existsJobSeekerByIdentityNumber(jobSeeker.getIdentityNumber()))
 			return new ErrorResult("Kimlik numaranız sistemde kayıtlıdır.");
 
-		if (!mailValidationService.validate(jobSeeker.getEmail()).isSuccess())
+		if (!mailValidationService.validate(jobSeeker.getUser().getEmail()).isSuccess())
 			return new ErrorResult("Mail doğrulaması başarısız.");
 
 		jobSeekerDao.save(jobSeeker);
-		return new SuccessResult(jobSeeker.getEmail() + " : Sisteme kaydoldu.");
+		return new SuccessResult(jobSeeker.getUser().getEmail() + " : Sisteme kaydoldu.");
 	}
 
 	private boolean dataControl(JobSeeker jobSeeker) {
-		if (jobSeeker.getEmail() == null || jobSeeker.getEmail().isBlank() || jobSeeker.getFirstName() == null
+		if (jobSeeker.getUser().getEmail() == null || jobSeeker.getUser().getEmail().isBlank() || jobSeeker.getFirstName() == null
 				|| jobSeeker.getFirstName().isBlank() || jobSeeker.getLastName() == null
 				|| jobSeeker.getLastName().isBlank() || jobSeeker.getIdentityNumber() == null
-				|| jobSeeker.getIdentityNumber().isBlank() || jobSeeker.getPassword() == null
-				|| jobSeeker.getPassword().isBlank()) {
+				|| jobSeeker.getIdentityNumber().isBlank() || jobSeeker.getUser().getPassword() == null
+				|| jobSeeker.getUser().getPassword().isBlank()) {
 			return false;
 		} else {
 			return true;

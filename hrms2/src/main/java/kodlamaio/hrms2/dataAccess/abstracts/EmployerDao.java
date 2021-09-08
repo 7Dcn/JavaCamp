@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import kodlamaio.hrms2.entities.concretes.Employer;
 
 public interface EmployerDao extends JpaRepository<Employer, Integer> {
-	boolean existsEmployerByEmail(String email);
+	boolean existsEmployerByUser_Email(String email);
 }

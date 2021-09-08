@@ -38,16 +38,16 @@ public class EmployerManager implements EmployerService {
 		if (!dataControl(employer))
 			return new ErrorResult("Alanlar boş bırakılamaz.");
 
-		if (!mailValidationService.validate(employer.getEmail()).isSuccess())
+		if (!mailValidationService.validate(employer.getUser().getEmail()).isSuccess())
 			return new ErrorResult("Girilen email hatalı.");
 
-		if (employerDao.existsEmployerByEmail(employer.getEmail()))
+		if (employerDao.existsEmployerByUser_Email(employer.getUser().getEmail()))
 			return new ErrorResult("Email sisteme daha önce kaydolmuş");
 
-		if (!mailValidationService.checkEmailDomain(employer.getWebAddress(), employer.getEmail()))
+		if (!mailValidationService.checkEmailDomain(employer.getWebAddress(), employer.getUser().getEmail()))
 			return new ErrorResult("Email ile web adresi uyumlu değil.");
 
-		if (!mailValidationService.validate(employer.getEmail()).isSuccess())
+		if (!mailValidationService.validate(employer.getUser().getEmail()).isSuccess())
 			return new ErrorResult("Mail doğrulaması başarısız.");
 
 		this.employerDao.save(employer);
@@ -56,8 +56,8 @@ public class EmployerManager implements EmployerService {
 	
 	private boolean dataControl(Employer employer) {
 		if (employer.getCompanyName() == null || employer.getCompanyName().isBlank() || employer.getWebAddress() == null
-				|| employer.getWebAddress().isBlank() || employer.getEmail() == null || employer.getEmail().isBlank()
-				|| employer.getPassword() == null || employer.getPassword().isBlank()
+				|| employer.getWebAddress().isBlank() || employer.getUser().getEmail() == null || employer.getUser().getEmail().isBlank()
+				|| employer.getUser().getPassword() == null || employer.getUser().getPassword().isBlank()
 				|| employer.getPhoneNumber() == null || employer.getPhoneNumber().isBlank()) {
 			return false;
 		} else {

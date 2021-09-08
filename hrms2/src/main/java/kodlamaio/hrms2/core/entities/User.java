@@ -7,10 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
+import kodlamaio.hrms2.entities.concretes.Employee;
+import kodlamaio.hrms2.entities.concretes.Employer;
+import kodlamaio.hrms2.entities.concretes.JobSeeker;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,4 +39,12 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
+	@OneToOne(mappedBy = "user")
+	private Employer employer;
+	
+	@OneToOne(mappedBy = "user")
+	private JobSeeker jobSeeker;
+	
+	@OneToOne(mappedBy = "user")
+	private Employee employee;
 }

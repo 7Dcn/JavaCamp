@@ -2,9 +2,14 @@ package kodlamaio.hrms2.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import kodlamaio.hrms2.core.entities.User;
@@ -19,9 +24,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "employees")
-@PrimaryKeyJoinColumn(name = "employee_id")
-public class Employee extends User {
+public class Employee {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
+	@Column(name="employee_id")
+	private int employeeId;
+	
 	@NotNull
 	@Column(name = "first_name")
 	private String firstName;
@@ -34,4 +44,9 @@ public class Employee extends User {
 	@Column(name = "position")
 	private String position;
 
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
 }
