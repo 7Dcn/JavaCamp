@@ -1,6 +1,5 @@
 package kodlamaio.hrms2.core.validation.mernis;
 
-import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ import kodlamaio.hrms2.core.utilities.SuccessResult;
 public class MernisValidation implements JobSeekerValidatorService {
 
 	@Override
-	public Result validate(String nationalId, String firstName, String lastName, Date birthYear) {
+	public Result validate(String nationalId, String firstName, String lastName, String birthYear) {
 		return new SuccessResult("Kimlik numarasi dogrulandi: " + nationalId);
 	}
 

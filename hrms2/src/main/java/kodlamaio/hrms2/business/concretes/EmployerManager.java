@@ -58,7 +58,6 @@ public class EmployerManager implements EmployerService {
 		if (employer.getCompanyName() == null || employer.getCompanyName().isBlank() || employer.getWebAddress() == null
 				|| employer.getWebAddress().isBlank() || employer.getEmail() == null || employer.getEmail().isBlank()
 				|| employer.getPassword() == null || employer.getPassword().isBlank()
-				|| employer.getPasswordAgain() == null || employer.getPasswordAgain().isBlank()
 				|| employer.getPhoneNumber() == null || employer.getPhoneNumber().isBlank()) {
 			return false;
 		} else {

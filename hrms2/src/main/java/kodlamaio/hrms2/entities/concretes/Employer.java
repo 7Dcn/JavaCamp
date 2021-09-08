@@ -2,37 +2,25 @@ package kodlamaio.hrms2.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
+import kodlamaio.hrms2.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "employers")
-public class Employer {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	@Column(name = "employer_id")
-	private int employerId;
-	
-	@NotNull
-	@Column(name = "password")
-	private String password;
-	
-	@NotNull
-	@Column(name = "password_again")
-	private String passwordAgain;
+@PrimaryKeyJoinColumn(name = "employer_id")
+public class Employer extends User {
 	
 	@NotNull
 	@Column(name = "web_address")
